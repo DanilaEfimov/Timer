@@ -3,6 +3,7 @@
 
 #include "counter.h"
 #include <QMainWindow>
+#include <QPalette>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,6 +21,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    const QPalette palette = QPalette({100, 40, 40}, {40, 60, 40});
 
     static Counter* timer;
 };

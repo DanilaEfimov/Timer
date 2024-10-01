@@ -37,7 +37,14 @@ Counter::~Counter() {
 }
 
 QString Counter::getTimeText(uint value) const {
+    QString res = "";
+    if(this->isDecimal){
 
+    }
+    else{
+
+    }
+    return res;
 }
 
 // ------ INITIALIZE ------
@@ -46,6 +53,8 @@ int Counter::initLayouts() {
     this->mainLayout = new QVBoxLayout(this);
     this->buttonsLayout = new QHBoxLayout(this);
     this->timeLayout = new QHBoxLayout(this);
+
+    return 0;
 }
 
 int Counter::initButtons() {
@@ -54,12 +63,16 @@ int Counter::initButtons() {
 
     this->modeTrigger->setText("Change mode");
     this->pauseTrigger->setText("Pause");
+
+    return 0;
 }
 
 int Counter::initFields() {
     this->hoursField = new QLineEdit(this);
     this->minutesField = new QLineEdit(this);
     this->secondsField = new QLineEdit(this);
+
+    return 0;
 }
 
 int Counter::initVariables() {
@@ -69,6 +82,8 @@ int Counter::initVariables() {
     this->hours = 0;
     this->minutes = 0;
     this->seconds = 0;
+
+    return 0;
 }
 
 void Counter::binding() {
@@ -77,6 +92,10 @@ void Counter::binding() {
 
     this->buttonsLayout->addWidget(this->modeTrigger);
     this->buttonsLayout->addWidget(this->pauseTrigger);
+
+    this->timeLayout->addWidget(this->hoursField);
+    this->timeLayout->addWidget(this->minutesField);
+    this->timeLayout->addWidget(this->secondsField);
 
     this->mainLayout->addLayout(this->buttonsLayout);
     this->mainLayout->addLayout(this->timeLayout);
