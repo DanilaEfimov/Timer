@@ -1,5 +1,6 @@
 #ifndef COUNTER_H
 #define COUNTER_H
+#define FRAME_FREQUENCY 60
 
 #include <QWidget>
 #include <QBoxLayout>
@@ -21,6 +22,7 @@ public:
     virtual ~Counter();
 
     QString getTimeText(uint value) const;
+    int getFrameFrequency() const;
 
 private:
     QVBoxLayout* mainLayout;
@@ -36,9 +38,9 @@ private:
     QLineEdit* minutesField;
     QLineEdit* secondsField;
 
-    int hours;
-    int minutes;
-    int seconds;
+    double hours;
+    double minutes;
+    double seconds;
 
     static const double msr;    // minute & second ratio normal to decimal (60/100)
     static const double hr;     // hour ratio normal to decimal (12/10)

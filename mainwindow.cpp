@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setWindowTitle("Timer");
     this->setPalette(palette);
-    this->setWindowIcon(QIcon("src/images/timer.png"));
+    this->setWindowIcon(QIcon("E:/Qt creator/Timer/src/images/timer.png"));
 }
 
 MainWindow::~MainWindow()

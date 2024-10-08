@@ -39,12 +39,15 @@ Counter::~Counter() {
 QString Counter::getTimeText(uint value) const {
     QString res = "";
     if(this->isDecimal){
-
     }
     else{
 
     }
     return res;
+}
+
+int Counter::getFrameFrequency() const {
+    return FRAME_FREQUENCY; // 60 frames per seconds
 }
 
 // ------ INITIALIZE ------
@@ -89,7 +92,9 @@ int Counter::initVariables() {
 void Counter::binding() {
     connect(this->modeTrigger, SIGNAL(this->modeChanged()), this, SLOT(this->changeMode()));
     connect(this->pauseTrigger,SIGNAL(this->timerPaused()), this, SLOT(this->pause()));
+    connect(this              ,SIGNAL(this->QWidget::repaint()),     this, SLOT(this->updateNormalTime()));
 
+    // Layouts
     this->buttonsLayout->addWidget(this->modeTrigger);
     this->buttonsLayout->addWidget(this->pauseTrigger);
 
@@ -104,23 +109,40 @@ void Counter::binding() {
 // ----- SIGNALS -----
 
 bool Counter::timerPaused(){
-
+    this->pauseTrigger->setCheckable(false);
+    return paused;
 }
 
 bool Counter::modeChanged(){
-    // random things
+    return this->isDecimal;
 }
 
 void Counter::pause() {
-
+    this->paused = true;
 }
 
 void Counter::changeMode() {
-
+    this->isDecimal = !this->isDecimal;
 }
 
 void Counter::updateNormalTime() {
-
+    double dt = 1;
+    for(size_t i = 0; i < digits; i++){
+        dt /= 10;
+    }
+    dt /= 60;
+    this->seconds -= dt;
+    if(this->seconds < 0){
+        this->seconds = 60.f;
+        this->minutes -= 1;
+        if(this->minutes < 0.f){
+            this->minutes = 60.f;
+            this->hours -= 1;
+            if(this->hours < 0){
+                hours = 0;
+            }
+        }
+    }
 }
 
 void Counter::updateDecimalTime()
